@@ -1,6 +1,9 @@
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes')
 const app = express();
+
+app.use(authRoutes)
 
 require('dotenv').config()
 
@@ -25,6 +28,7 @@ app.get('/', (req, res) => {
 app.get('/hey', (req, res) => {
     res.send('COOOOL HEY PAGEE')
 });
+
 
 app.listen(3000, () => {
     console.log(`Example app listening at http://localhost:3000`)
