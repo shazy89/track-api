@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
 //const trackRoutes = require('./routes/trackRoutes');
-//const requireAuth = require('./middlewares/requireAuth');
+const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
 app.use(bodyParser.json());
@@ -19,7 +19,8 @@ const mongoUri = `mongodb+srv://ed:${process.env.DB_PASS}@cluster0.jybnz.mongodb
 
  mongoose.connect(mongoUri, {
    useNewUrlParser: true,
-   useCreateIndex: true
+   useCreateIndex: true,
+   useUnifiedTopology: true
  });
  mongoose.connection.on('connected', () => {
    console.log('Connected to mongo instance');
@@ -28,9 +29,9 @@ const mongoUri = `mongodb+srv://ed:${process.env.DB_PASS}@cluster0.jybnz.mongodb
    console.error('Error connecting to mongo', err);
  });
 
-//app.get('/', requireAuth, (req, res) => {
-//  res.send(`Your email: `);
-//});
+  app.get('/', requireAuth, (req, res) => {
+    res.send(`Your email: ${req.user.email}`);
+  });
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
