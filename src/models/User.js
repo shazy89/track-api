@@ -5,11 +5,11 @@ const userSchema = new mongoose.Schema({
       type: String,
       unique: true,
       required: true
-    },
+   },
     password: {
-      type: String,
-      required: true
-    }
+       type: String,
+       required: true
+   }
   });
       // to be able to use  ( << this >> )  to we must use function(), if we use ( => )function we cannot use inside the arrow func  ( << this >> ) 
   userSchema.pre('save', function(next) {
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
             resolve(true);
         });
     });
-  }
+  };
 
  mongoose.model('User', userSchema);
 
