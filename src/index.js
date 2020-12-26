@@ -1,19 +1,20 @@
 require('./models/User');
-//require('./models/Track');
+require('./models/Track');
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
-//const trackRoutes = require('./routes/trackRoutes');
+const trackRoutes = require('./routes/trackRoutes');
 const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(authRoutes);
 
-//app.use(trackRoutes);
+app.use(authRoutes);
+app.use(trackRoutes);
+
 
 const mongoUri = `mongodb+srv://ed:${process.env.DB_PASS}@cluster0.jybnz.mongodb.net/Cluster0?retryWrites=true&w=majority`;
 

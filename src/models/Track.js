@@ -3,15 +3,14 @@ const mongoose = require('mongoose');
 const pointSchema = new mongoose.Schema({
     timestamp: Number,
     coords: {
-        latitude: Number,
-        longitude: Number,
-        altitude: Number,
-        accuracy: Number,
-        heading: Number,
-        speed: Number
+      latitude: Number,
+      longitude: Number,
+      altitude: Number,
+      accuracy: Number,
+      heading: Number,
+      speed: Number
     }
-});
-
+  });
 const trackSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId, // This is how we indicate that user id is reference to some other id stored in monog db
@@ -23,3 +22,5 @@ const trackSchema = new mongoose.Schema({
     },
     locations: [pointSchema]
 })
+
+mongoose.model('Track', trackSchema)
